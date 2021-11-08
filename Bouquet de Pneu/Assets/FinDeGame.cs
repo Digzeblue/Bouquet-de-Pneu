@@ -6,7 +6,6 @@ public class FinDeGame : MonoBehaviour
 {
     public GameObject joe;
     public GameObject mcamera;
-    float timer = 5f;
     Vector3 pointArriveJoe = new Vector3(20, 5, 15);
     Vector3 pointArriveCamera = new Vector3(0, 0, -25);
     // Start is called before the first frame update
