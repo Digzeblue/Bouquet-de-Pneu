@@ -13,6 +13,7 @@ public class GrowFlower : MonoBehaviour
     private float nextFlower;   //Prochain timing où on peut agir
 
     private Vector3 center;
+    private float spawnRange = 0.3f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,10 +30,23 @@ public class GrowFlower : MonoBehaviour
             {
                 nextFlower = Time.time + cooldown;  //reset timer
 
-                Vector3 pos = player.transform.position;
+                Vector3 posPlayer = player.transform.position;
+
+                //On prend une position aléatoire dans un cercle autour du joueur
+                Vector3 pos = new Vector3(
+                    posPlayer.x + Random.Range(-spawnRange, spawnRange),
+                    posPlayer.y + Random.Range(-spawnRange, spawnRange),
+                    posPlayer.z);
+                pos.z += 0.2f * Vector3.Distance(posPlayer, pos);
+
+                //On oriente la fleur vers le centre de la planète
                 Quaternion rot = Quaternion.FromToRotation(Vector3.up, center - pos);
-                Instantiate(flower, pos, rot);
+
+                //On crée une fleur qui a la planète pour parent
+                GameObject f = Instantiate(flower, pos, rot);
+                f.transform.parent = this.transform;
             }
         }
     }
+
 }
