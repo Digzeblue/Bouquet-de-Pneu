@@ -11,6 +11,7 @@ public class rotation : MonoBehaviour
     public bool rotate;
     public bool rotateConstantly;
 
+    private Vector3 leVecteurQuiTourne;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,55 +21,53 @@ public class rotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.Rotate(leVecteurQuiTourne, Space.World);
+
         if(rotate)
         transform.rotation = Quaternion.Lerp(transform.rotation, startQuaternion, Time.deltaTime * lerpTime);
         // si je coche rotate et que la sphère n'est pas dans ça position initial = elle se remet en plus
         if (rotateConstantly)
         {
             
-                if (Input.GetKey(KeyCode.Z))
+                if (Input.GetKeyDown(KeyCode.Q))
                 {
-                    transform.Rotate(Vector3.up * RotateAmount);
+                    leVecteurQuiTourne = Vector3.up * RotateAmount;
                 }
                 //Sinon si j'appuie sur S
-                else if (Input.GetKey(KeyCode.S))
+                else if (Input.GetKey(KeyCode.D))
                 {
-                    transform.Rotate(Vector3.down * RotateAmount);
+                    leVecteurQuiTourne = Vector3.down * RotateAmount;
                 }
             
 
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.Z))
             {
-                if (Input.GetKey(KeyCode.Z))
+                if (Input.GetKey(KeyCode.Q))
                 {
-                    transform.Rotate(Vector3.right * RotateAmount);
-                    transform.Rotate(Vector3.up * RotateAmount);
+                    leVecteurQuiTourne = (Vector3.right + Vector3.up) * RotateAmount;
                 }
                 //Sinon si j'appuie sur S
-                else if (Input.GetKey(KeyCode.S))
+                else if (Input.GetKey(KeyCode.D))
                 {
-                    transform.Rotate(Vector3.right * RotateAmount);
-                    transform.Rotate(Vector3.down * RotateAmount);
+                    leVecteurQuiTourne = (Vector3.right + Vector3.down) * RotateAmount;
                 }
                 //Sinon
-                else transform.Rotate(Vector3.right * RotateAmount);
+                else leVecteurQuiTourne = Vector3.right * RotateAmount;
             }
             
-            if (Input.GetKey(KeyCode.Q))
+            if (Input.GetKey(KeyCode.S))
             {
-                if (Input.GetKey(KeyCode.Z))
+                if (Input.GetKey(KeyCode.Q))
                 {
-                    transform.Rotate(Vector3.left * RotateAmount);
-                    transform.Rotate(Vector3.up * RotateAmount);
+                    leVecteurQuiTourne = (Vector3.left + Vector3.up) * RotateAmount;
                 }
                 //Sinon si j'appuie sur S
-                else if (Input.GetKey(KeyCode.S))
+                else if (Input.GetKey(KeyCode.D))
                 {
-                    transform.Rotate(Vector3.left * RotateAmount);
-                    transform.Rotate(Vector3.down * RotateAmount);
+                    leVecteurQuiTourne = (Vector3.left + Vector3.down) * RotateAmount;
                 }
                 //Sinon
-                else transform.Rotate(Vector3.left * RotateAmount);
+                else leVecteurQuiTourne = Vector3.left * RotateAmount;
             }
         }
             
