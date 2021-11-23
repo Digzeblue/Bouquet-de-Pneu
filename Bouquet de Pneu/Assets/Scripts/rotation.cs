@@ -21,7 +21,7 @@ public class rotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(leVecteurQuiTourne, Space.World);
+        transform.Rotate(leVecteurQuiTourne * RotateAmount, Space.World);
 
         if(rotate)
         transform.rotation = Quaternion.Lerp(transform.rotation, startQuaternion, Time.deltaTime * lerpTime);
@@ -31,12 +31,12 @@ public class rotation : MonoBehaviour
             
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
-                    leVecteurQuiTourne = Vector3.up * RotateAmount;
+                    leVecteurQuiTourne = Vector3.up;
                 }
                 //Sinon si j'appuie sur S
                 else if (Input.GetKey(KeyCode.D))
                 {
-                    leVecteurQuiTourne = Vector3.down * RotateAmount;
+                    leVecteurQuiTourne = Vector3.down;
                 }
             
 
@@ -44,12 +44,12 @@ public class rotation : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.Q))
                 {
-                    leVecteurQuiTourne = (Vector3.right + Vector3.up) * RotateAmount;
+                    leVecteurQuiTourne = (Vector3.right + Vector3.up);
                 }
                 //Sinon si j'appuie sur S
                 else if (Input.GetKey(KeyCode.D))
                 {
-                    leVecteurQuiTourne = (Vector3.right + Vector3.down) * RotateAmount;
+                    leVecteurQuiTourne = (Vector3.right + Vector3.down);
                 }
                 //Sinon
                 else leVecteurQuiTourne = Vector3.right * RotateAmount;
@@ -59,15 +59,15 @@ public class rotation : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.Q))
                 {
-                    leVecteurQuiTourne = (Vector3.left + Vector3.up) * RotateAmount;
+                    leVecteurQuiTourne = (Vector3.left + Vector3.up);
                 }
                 //Sinon si j'appuie sur S
                 else if (Input.GetKey(KeyCode.D))
                 {
-                    leVecteurQuiTourne = (Vector3.left + Vector3.down) * RotateAmount;
+                    leVecteurQuiTourne = (Vector3.left + Vector3.down);
                 }
                 //Sinon
-                else leVecteurQuiTourne = Vector3.left * RotateAmount;
+                else leVecteurQuiTourne = Vector3.left;
             }
         }
             
@@ -93,5 +93,15 @@ public class rotation : MonoBehaviour
     {
         transform.rotation = startQuaternion;
 
+    }
+
+    public void changeSpeed (float spe)
+    {
+        this.RotateAmount = spe;
+    }
+
+    public float getSpeed()
+    {
+        return RotateAmount;
     }
 }
