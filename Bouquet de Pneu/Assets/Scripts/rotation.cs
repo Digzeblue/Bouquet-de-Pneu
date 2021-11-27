@@ -12,6 +12,7 @@ public class rotation : MonoBehaviour
     public bool rotateConstantly;
 
     private Vector3 leVecteurQuiTourne;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +53,7 @@ public class rotation : MonoBehaviour
                     leVecteurQuiTourne = (Vector3.right + Vector3.down);
                 }
                 //Sinon
-                else leVecteurQuiTourne = Vector3.right * RotateAmount;
+                else leVecteurQuiTourne = Vector3.right;
             }
             
             if (Input.GetKey(KeyCode.S))
